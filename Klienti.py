@@ -6,7 +6,9 @@ from Crypto.Hash import SHA256
 
 
 def start_client():
-    pass
+    # 1. Lexo celesin privat te klientit per te nenshkruar mesazhin
+    with open("client_private.pem", "rb") as f:
+        client_private_key = RSA.import_key(f.read())
 
 
 if __name__ == "__main__":
