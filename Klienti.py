@@ -23,6 +23,9 @@ def start_client():
     h = SHA256.new(message)
     signature = pkcs1_15.new(client_private_key).sign(h)
 
+    # 4. Kriptimi i mesazhit
+    encrypted_msg = cipher_rsa.encrypt(message)
+
 
 if __name__ == "__main__":
     start_client()
