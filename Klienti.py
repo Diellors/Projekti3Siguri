@@ -15,6 +15,10 @@ def start_client():
         server_public_key = RSA.import_key(f.read())
     cipher_rsa = PKCS1_OAEP.new(server_public_key)
 
+    # Merr mesazhin nga tastiera (perdoruesi e shkruan vete)
+    user_input = input("Shkruaj mesazhin qe deshiron te dergosh te Serveri: ")
+    message = user_input.encode()
+
 
 if __name__ == "__main__":
     start_client()
