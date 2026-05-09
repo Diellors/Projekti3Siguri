@@ -10,6 +10,11 @@ def start_client():
     with open("client_private.pem", "rb") as f:
         client_private_key = RSA.import_key(f.read())
 
+    # 2. Lexo certifikaten e serverit (X.509) per te kriptuar mesazhin
+    with open("server_cert.crt", "rb") as f:
+        server_public_key = RSA.import_key(f.read())
+    cipher_rsa = PKCS1_OAEP.new(server_public_key)
+
 
 if __name__ == "__main__":
     start_client()
