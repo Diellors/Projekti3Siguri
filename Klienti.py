@@ -26,6 +26,16 @@ def start_client():
     # 4. Kriptimi i mesazhit
     encrypted_msg = cipher_rsa.encrypt(message)
 
+    # 5. Lidhja TCP dhe dergimi
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect(("localhost", 12345))
+
+    client_socket.send(signature)
+    client_socket.send(encrypted_msg)
+
+    print("\nMesazhi u nenshkrua, u kriptua dhe u dergua me sukses!")
+    client_socket.close()
+
 
 if __name__ == "__main__":
     start_client()
