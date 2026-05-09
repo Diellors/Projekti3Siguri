@@ -19,6 +19,10 @@ def start_client():
     user_input = input("Shkruaj mesazhin qe deshiron te dergosh te Serveri: ")
     message = user_input.encode()
 
+    # 3. Krijimi i Nenshkrimit Digjital (Digital Signature)
+    h = SHA256.new(message)
+    signature = pkcs1_15.new(client_private_key).sign(h)
+
 
 if __name__ == "__main__":
     start_client()
