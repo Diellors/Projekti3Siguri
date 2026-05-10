@@ -19,3 +19,25 @@ def start_server():
 
     conn, addr = server_socket.accept()
     print(f"Lidhja u pranua nga: {addr}")
+   
+   signature = conn.recv(256)
+    encrypted_msg = conn.recv(1024)
+
+    try:
+
+        decrypted_msg = cipher_rsa.decrypt(encrypted_msg)
+        print(f"Mesazhi u dekriptua me sukses!")
+
+        h = SHA256.new(decrypted_msg)
+        pkcs1_15.new(client_public_key).verify(h, signature)
+        print("Verifikimi i Nënshkrimit: SUKSES (Mesazhi është i vërtetë dhe i paprekur)!")
+        print(f"Përmbajtja e mesazhit: {decrypted_msg.decode()}")
+
+    except (ValueError, TypeError):
+        print("ALARM: Verifikimi dështoi! Mesazhi ose nënshkrimi mund të jenë manipuluar.")
+
+    conn.close()
+    server_socket.close()
+
+if __name__ == "__main__":
+    start_server()
